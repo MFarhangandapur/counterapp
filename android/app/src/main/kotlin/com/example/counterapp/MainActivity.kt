@@ -1,4 +1,4 @@
-package com.example.getcounterapp
+package com.example.counterapp
 
 import io.flutter.embedding.android.FlutterActivity
 

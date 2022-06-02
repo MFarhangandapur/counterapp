@@ -1,51 +1,52 @@
-// ignore_for_file: sort_child_properties_last
+// ignore: unused_import
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:getcounterapp/Controller.dart';
-import 'package:get/get.dart';
 
 main() {
-  runApp(const Home());
+  runApp(const MyApp());
 }
 
-final Controller _controller = Get.put(Controller());
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int counter = 0;
+  @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text(
-            'Getx Counter App ',
-            style: TextStyle(color: Colors.white),
-          ),
-          leading:  IconButton(
-            icon: const Icon(Icons.restore, color: Colors.white),
-            onPressed: () {
-              _controller.restore();
-            },
+          backgroundColor: Colors.blue,
+          // ignore: prefer_const_constructors
+          title: Center(
+            child: const Text(
+              "Counter App ",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
-        body: Obx(() => Center(
-              child: Text(
-                _controller.count.value.toString(),
-                style: const TextStyle(color: Colors.white, fontSize: 50),
-              ),
-            )),
+        body: Center(
+          child: Text(
+            counter.toString(),
+            style: const TextStyle(color: Colors.black, fontSize: 50),
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _controller.increment();
-            },
-            child: const Icon(
-              Icons.add,
-              color: Colors.black,
-            ),
-            backgroundColor: Colors.white),
+          onPressed: () {
+            counter++;
+            setState(() {});
+          },
+          hoverColor: Colors.red,
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
